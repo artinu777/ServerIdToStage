@@ -1,0 +1,62 @@
+basePath: /api/v1
+host: '{{.Host}}'
+info:
+  contact:
+    email: test@test.ru
+    name: API Support
+  description: Описание сервиса
+  license: {}
+  termsOfService: http://swagger.io/terms/
+  title: Sample Service API
+  version: "1.0"
+paths:
+  /ping:
+    get:
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: проверка доступности сервера
+      tags:
+      - General
+  /server/{id}/stage/{stage_id}:
+    get:
+      parameters:
+      - description: id valid int
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: stage_id valid int
+        in: path
+        name: stage_id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: проверка доступности сервера
+      tags:
+      - General
+schemes:
+- http
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
+tags:
+- description: Общие запросы и авторизация
+  name: General
