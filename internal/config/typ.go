@@ -5,6 +5,7 @@ import (
 	"github.com/sungora/app/connect"
 	"github.com/sungora/app/servhttp"
 	"github.com/sungora/app/workflow"
+	"github.com/sungora/sample/internal/rocket"
 )
 
 type Config struct {
@@ -13,6 +14,7 @@ type Config struct {
 	Http     servhttp.Config `yaml:"Http"`
 	Connect  connect.Config  `yaml:"Connect"`
 	Users    Users           `yaml:"Users"`
+	RocketChat rocket.Config `yaml:"RocketChat"`
 }
 
 type Users struct {

@@ -4,6 +4,7 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/sungora/app/connect"
 	"github.com/sungora/app/request"
+	"github.com/sungora/sample/internal/rocket"
 	"github.com/sungora/sample/internal/stage"
 	"net/http"
 	"strconv"
@@ -35,9 +36,27 @@ func Stage1Handler(w http.ResponseWriter, r *http.Request) {
 		ServerID: idToDatabase,
 		Stage:    StageidToDatabase,
 	}
-
 	if err := connect.GetDB().Where("server_id = ?", idFrom).Assign(server).FirstOrCreate(&server); nil != err {
 		//request.NewIn(w, r).Json(err)
 	}
+
+	newmessage := rocket.Massage{}
+
+	newmessage.Text = "Server " + idFrom + " " + rename(StageidToDatabase)
+	rocket.Send(newmessage)
+
 	request.NewIn(w, r).Json(server)
+}
+
+func rename(in int64) string {
+	switch in {
+	case 1:
+		return "stage 1"
+	case 2:
+		return "stage 2"
+	case 3:
+		return "stage 3"
+	default:
+		return "not definition"
+	}
 }

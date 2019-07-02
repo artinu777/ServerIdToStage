@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/sungora/sample/internal/rocket"
 	"os"
 
 	"github.com/go-chi/chi"
@@ -58,6 +59,7 @@ func Start() (code int) {
 	}
 	app.ConfigSetDefault(&Cfg.App)
 
+	rocket.Init(Cfg.RocketChat)
 	// COMPONENTS
 	// connect
 	if component, err = connect.Init(&Cfg.Connect, *flagLogDB); err != nil {
